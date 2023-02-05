@@ -1,4 +1,4 @@
-import model.{Subscribe, SubscribeChanel, codecs}
+import model.{GetDetails, Subscribe, SubscribeChanel, codecs}
 import org.scalatest.wordspec.AsyncWordSpec
 import spray.json._
 import codecs._
@@ -18,13 +18,16 @@ class CodecSpec extends AsyncWordSpec {
       Some(List("BTSports")),
       "123456789"
     )
+    val sampleReq3 = GetDetails("1234567")
 
     val jsonStrSuscribe = sampleReq1.toJson.compactPrint
     val jsonStrSubChanel = smapleReq2.toJson.compactPrint
+    val jsonGetResult = sampleReq3.toJson.compactPrint
 
     assert(jsonStrSuscribe ==
       """{"additionalChannel":["DDNational"],"email":"roshan.raj.panda@gmail.com","fullName":"Roshan Raj Panda","packageName":["basic"],"phNo":"0123456789","plan":"Monthly"}""".stripMargin)
-    assert(jsonStrSubChanel  == """{"id":"123456789","name":["BTSports"]}""" )
+    assert(jsonStrSubChanel  == """{"name":["BTSports"],"uid":"123456789"}""" )
+    assert( jsonGetResult == """{"uid":"1234567"}""")
   }
 
 
