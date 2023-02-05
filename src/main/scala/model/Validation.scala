@@ -48,7 +48,7 @@ object SubscribeValidation extends Validation[Subscribe] {
     lazy val fullNameValidation: ValidationResult[String] = if(request.fullName.nonEmpty && request.fullName.length > 2)  request.fullName.validNec else InvalidError("Full ame should be greater than 2 char").invalidNec
     lazy val planValidation: ValidationResult[String] = Try(Plan(request.plan)) match {
       case Success(_) => request.plan.validNec
-      case Failure(_) => InvalidError("Select valid plan from Monthly, Bimonthly, Yearly").invalidNec
+      case Failure(_) => InvalidError("Select valid plan from Monthly, Biannual, Yearly").invalidNec
     }
     val validPackage: ValidationResult[Option[Seq[String]]] = request.packageName.validNec
     val validChannel: ValidationResult[Option[Seq[String]]] = request.additionalChannel.validNec
