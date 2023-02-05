@@ -24,7 +24,7 @@ object StateActor {
 
   case class GetState(id: String, replyTo: ActorRef[State]) extends StateRequest
 
-  case class State(s: StateTranscation) extends StateRequest
+  case class State(state: StateTranscation) extends StateRequest
 
 
   def getStateRequest(): Behavior[StateRequest] = {

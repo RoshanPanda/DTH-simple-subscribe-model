@@ -30,7 +30,7 @@ class StateSpec extends AsyncWordSpec {
       res <- states
     } yield {
       println(res)
-      assert(res.s.plan.contains(Monthly))
+      assert(res.state.plan.contains(Monthly))
     }
   }
 
@@ -44,7 +44,7 @@ class StateSpec extends AsyncWordSpec {
       res <- states
     } yield {
       println(res)
-      assert(res.s.plan.contains(Annual))
+      assert(res.state.plan.contains(Annual))
     }
   }
 

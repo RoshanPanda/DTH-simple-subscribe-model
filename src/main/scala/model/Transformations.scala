@@ -44,7 +44,7 @@ object Transformations {
     val cstate = StateActor.getStates(s.uid)(aref, system)
     cstate.map {
       state =>
-        state.s.copy(channels = state.s.channels |+| addchanel)
+        state.state.copy(channels = state.state.channels |+| addchanel)
     }
   }
 

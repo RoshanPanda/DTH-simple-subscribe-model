@@ -68,6 +68,7 @@ object ChannelList {
   val extraChannels: Seq[String] = List("BTSports")
   val allChannels: Seq[String] = sportsPlus.toList ::: extraChannels.toList
 
+
   def getChannels(name: String): Option[Seq[String]] = {
     PackageNames.from(name) match {
       case PackageNames.basic => Some(basicChannels)

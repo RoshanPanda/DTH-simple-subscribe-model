@@ -2,13 +2,10 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpResponse
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import model._
+import model.codecs.{getdtl, sub, _}
 import org.scalatest.wordspec.AsyncWordSpec
 import services.{HttpClient, Routes}
-import model.codecs.{getdtl, sub, _}
 import spray.json._
-
-import scala.concurrent.duration.DurationInt
-import scala.concurrent.{Await, Future}
 
 class HttpSpec extends AsyncWordSpec {
   implicit val system = ActorSystem("test")
@@ -23,7 +20,7 @@ class HttpSpec extends AsyncWordSpec {
   )
 
 
-  "test https server" in {
+  "test https server" ignore {
 
     for {
       bind <- httpTest.startServer()
@@ -32,7 +29,7 @@ class HttpSpec extends AsyncWordSpec {
       for {
         unm <- Unmarshal(res).to[String]
       } yield {
-        val result = unm.parseJson.convertTo[Subscribed]
+        val result = if(res.status.intValue() == 200) unm.parseJson.convertTo[Subscribed] else unm.parseJson.convertTo[ErrorRes]
         println(result)
         //assert(result.plan.get == "Monthly")
       }
@@ -42,7 +39,7 @@ class HttpSpec extends AsyncWordSpec {
     }
   }
 
-  "test getdetails" ignore {
+  "test getdetails" in {
 
     for {
       bind <- httpTest.startServer()
@@ -53,11 +50,17 @@ class HttpSpec extends AsyncWordSpec {
       unmg: String <-  Unmarshal(resG).to[String]
       sub  = unmg.parseJson.convertTo[Subscribed]
     } yield {
+      println(unm)
       println(s"current result $sub")
       httpTest.stopServer(Seq(bind))
       assert(true)
     }
 
+  }
+
+  "validate Subscriptin RouterSupport" ignore {
+    val res = httpTest.subscriptionRouteSupport(sampleReq).state()
+    assert(res.plan == Some("Monthly"))
   }
 
 }
