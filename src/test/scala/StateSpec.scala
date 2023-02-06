@@ -29,7 +29,6 @@ class StateSpec extends AsyncWordSpec {
     for {
       res <- states
     } yield {
-      println(res)
       assert(res.state.plan.contains(Monthly))
     }
   }
@@ -43,7 +42,6 @@ class StateSpec extends AsyncWordSpec {
     for {
       res <- states
     } yield {
-      println(res)
       assert(res.state.plan.contains(Annual))
     }
   }
