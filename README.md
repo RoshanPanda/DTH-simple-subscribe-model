@@ -11,7 +11,7 @@ To test the test cases use below command
 
 ``sbt test``
 
-Once app runs iut exposes below Uris
+Once app runs it exposes below Uris
 
 ``http://localhost:8080/subscribe`` to subscribe to the service.
 
