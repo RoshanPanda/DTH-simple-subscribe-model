@@ -30,7 +30,7 @@ class HttpSpec extends AsyncWordSpec {
         unm <- Unmarshal(res).to[String]
       } yield {
         val result = if(res.status.intValue() == 200) unm.parseJson.convertTo[Subscribed] else unm.parseJson.convertTo[ErrorRes]
-        println(result)
+        //println(result)
         //assert(result.plan.get == "Monthly")
       }
       Thread.sleep(3000)
@@ -53,14 +53,14 @@ class HttpSpec extends AsyncWordSpec {
       println(unm)
       println(s"current result $sub")
       httpTest.stopServer(Seq(bind))
-      assert(true)
+      assert(sub.plan.contains("Monthly"))
     }
 
   }
 
   "validate Subscriptin RouterSupport" ignore {
     val res = httpTest.subscriptionRouteSupport(sampleReq).state()
-    assert(res.plan == Some("Monthly"))
+    assert(res.plan.contains("Monthly"))
   }
 
 }
