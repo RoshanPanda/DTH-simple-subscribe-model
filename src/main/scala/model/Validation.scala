@@ -6,7 +6,7 @@ import akka.actor.ActorSystem
 import akka.actor.typed.ActorRef
 import cats.data.ValidatedNec
 import cats.implicits._
-import javafx.util.Duration.seconds
+
 
 import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
