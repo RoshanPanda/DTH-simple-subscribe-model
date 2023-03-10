@@ -25,6 +25,9 @@ case class StateTranscation(
                              channels: Option[List[Channel]],
                              plan: Option[Plan]
                            )
+object StateTranscation {
+  val noTran = StateTranscation("",None,"",None,None,None)
+}
 
 
 case class Channel(name: String)
