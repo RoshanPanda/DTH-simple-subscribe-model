@@ -40,7 +40,7 @@ object StateActor {
               state(v)
               Behaviors.same
             case UpdateState(st) =>
-              s.update(st.userId.get, st)
+              s.update(st.userId.getOrElse(""), st)
               Behaviors.same
             case GetState(id, replyTo) =>
               replyTo ! State(s.getOrElse(id, StateTranscation.noTran))
